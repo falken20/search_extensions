@@ -5,6 +5,7 @@ import os
 import sys
 
 from rich import print
+from rich import console
 from rich.console import Console
 from rich.table import Table
 from rich.progress import track
@@ -21,16 +22,23 @@ logging.basicConfig(format=f'{os.getenv("ID_LOG", "")} %(levelname)s:%(asctime)s
 # Load .env file
 load_dotenv(find_dotenv())
 
+# Create global object to manage terminal logs
+console = Console()
+
 
 def count_files(path):
+    console.print("Executing [bold]count_files[/bold]", style="green")
     # os.walk it yields a 3-tuple (dirpath, dirnames, filenames)
     return next(os.walk(path))[2]
 
 
 def get_params():
+    
+    console.print("Executing [bold]get_params[/bold]", style="green")
+
     path = os.getenv("PATH_DIR", "")
     extensions = os.getenv("EXTENSIONS", "")
-    files = count_files(path)
+    files = [count_files(path)]
 
     table = Table(show_header=True, header_style="bold red")
     table.add_column("Variable")
@@ -39,23 +47,35 @@ def get_params():
     table.add_row("EXTENSIONS", extensions)
     table.add_row("NUM FILES", str(len(files)))
 
-    return table
+    console.print(table)
+
+    return files, extensions
 
 
-def main():
-    console = Console()
-    console.print("Starting search_extensions cron", style="bold magenta")
-    # Go to the parent directory
-    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+def search_extensions() -> bool:
+    """ Main function
 
-    # Get the environment vars
-    console.print(get_params())
+    Returns:
+        bool: Return true if everything is ok or false in another case
+    """
+    console.print("Executing [bold]search_extensions[/bold]", style="green")
 
+    files, extensions = get_params()
+    
     a = 0
     for step in track(range(10000000), description="Processing..."):
         a += 1
 
-    print("[bold green]Init config finished[/bold green]", ":vampire:")
+def main():
+    console.print("\nStarting search_extensions cron\n", style="bold blue")
+    console.print(globals(), "\n")
+    # Go to the parent directory
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+    # Main proccess
+    search_extensions()
+
+    console.print("\n[bold blue]Init config finished[/bold blue]\n", ":smile:")
 
 
 if __name__ == "__main__":
