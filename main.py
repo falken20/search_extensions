@@ -28,8 +28,11 @@ console = Console()
 
 def count_files(path):
     console.print("Executing [bold]count_files[/bold]", style="green")
-    # os.walk it yields a 3-tuple (dirpath, dirnames, filenames)
-    return next(os.walk(path))[2]
+    # os.walk it yields a 3-tuple (dirpath, dirnames, filenames) for each folder and root
+    total_files = []
+    for root, dirs, files in os.walk(path):
+        total_files += files
+    return total_files
 
 
 def get_params():
@@ -38,7 +41,7 @@ def get_params():
 
     path = os.getenv("PATH_DIR", "")
     extensions = os.getenv("EXTENSIONS", "")
-    files = [count_files(path)]
+    files = count_files(path)
 
     table = Table(show_header=True, header_style="bold red")
     table.add_column("Variable")
@@ -62,9 +65,14 @@ def search_extensions() -> bool:
 
     files, extensions = get_params()
     
-    a = 0
-    for step in track(range(10000000), description="Processing..."):
-        a += 1
+    for step in track(range(10000000), description="Processing...\n"):
+        pass
+
+    count_files_affected = 0
+    for file in files:
+        count_files_affected += 1 if file[file.rfind(".") + 1:len(files)] in extensions else 0
+    print(f"Found: {count_files_affected} files")
+
 
 def main():
     console.print("\nStarting search_extensions cron\n", style="bold blue")
@@ -75,7 +83,7 @@ def main():
     # Main proccess
     search_extensions()
 
-    console.print("\n[bold blue]Init config finished[/bold blue]\n", ":smile:")
+    console.print("\n[bold blue]search_extensions finished[/bold blue] :smile:\n")
 
 
 if __name__ == "__main__":
