@@ -1,14 +1,16 @@
 # by Richi Rod AKA @richionline / falken20
 
+from hashlib import new
 import logging
 import os
 import sys
+import time
 
 from rich import print
 from rich import console
 from rich.console import Console
 from rich.table import Table
-from rich.progress import track
+from rich.progress import Progress
 
 from dotenv import load_dotenv, find_dotenv
 
@@ -30,8 +32,10 @@ def count_files(path):
     console.print("Executing [bold]count_files[/bold]", style="green")
     # os.walk it yields a 3-tuple (dirpath, dirnames, filenames) for each folder and root
     total_files = []
+
     for root, dirs, files in os.walk(path):
         total_files += files
+
     return total_files
 
 
@@ -64,19 +68,25 @@ def search_extensions() -> bool:
     console.print("Executing [bold]search_extensions[/bold]", style="green")
 
     files, extensions = get_params()
-    
-    for step in track(range(10000000), description="Processing...\n"):
-        pass
 
-    count_files_affected = 0
-    for file in files:
-        count_files_affected += 1 if file[file.rfind(".") + 1:len(files)] in extensions else 0
-    print(f"Found: {count_files_affected} files")
+    console.print("Starting to review [bold]files[/bold]", style="green")
+
+    # Preparing progress task bar
+    with Progress() as progress:
+        task = progress.add_task("[green]Searching for [bold]extensions[/bold]...", total=len(files))
+
+        count_files_affected = 0
+        for file in files:
+            count_files_affected += 1 if file[file.rfind(".") + 1:len(files)] in extensions else 0
+            progress.update(task, advance=1)
+
+    print(f"\n[red bold]Found: {count_files_affected} files with some of the extensions ({extensions})")
 
 
 def main():
     console.print("\nStarting search_extensions cron\n", style="bold blue")
     console.print(globals(), "\n")
+
     # Go to the parent directory
     sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
