@@ -5,6 +5,7 @@ import logging
 import os
 import sys
 import time
+from typing import List
 
 from rich import print
 from rich import console
@@ -39,15 +40,20 @@ def count_files(path):
     return total_files
 
 
-def get_params():
-    
+def get_params():    
     console.print("Executing [bold]get_params[/bold]", style="green")
 
-    path = os.getenv("PATH_DIR", "")
-    extensions = os.getenv("EXTENSIONS", "")
+    path = os.getenv("PATH_DIR") if os.getenv("PATH_DIR") else input("Insert path: ")
+    extensions = os.getenv("EXTENSIONS") if os.getenv("EXTENSIONS") else input("Insert extensions (separated by comma): ")
     files = count_files(path)
 
-    table = Table(show_header=True, header_style="bold red")
+    return path, extensions, files
+
+
+def print_table(path, extensions, files):
+    console.print("Executing [bold]print_table[/bold]", style="green")
+
+    table = Table(show_header=True, header_style="bold")
     table.add_column("Variable")
     table.add_column("Value")
     table.add_row("PATH", path)
@@ -56,36 +62,49 @@ def get_params():
 
     console.print(table)
 
-    return files, extensions
-
 
 def search_extensions() -> bool:
     """ Main function
 
     Returns:
-        bool: Return true if everything is ok or false in another case
+        bool: Return True if everything ok, False in other case
     """
     console.print("Executing [bold]search_extensions[/bold]", style="green")
 
-    files, extensions = get_params()
+    try:
+        file_list = []
+        path, extensions, files = get_params()
 
-    console.print("Starting to review [bold]files[/bold]", style="green")
+        print_table(path, extensions, files)
 
-    # Preparing progress task bar
-    with Progress() as progress:
-        task = progress.add_task("[green]Searching for [bold]extensions[/bold]...", total=len(files))
+        console.print("Starting to review [bold]files[/bold]", style="green")
 
-        count_files_affected = 0
-        for file in files:
-            count_files_affected += 1 if file[file.rfind(".") + 1:len(files)] in extensions else 0
-            progress.update(task, advance=1)
+        # Preparing progress task bar
+        with Progress() as progress:
+            task = progress.add_task("[green]Searching for [bold]extensions[/bold]...", total=len(files))
 
-    print(f"\n[red bold]Found: {count_files_affected} files with some of the extensions ({extensions})")
+            count_files_affected = 0
+            for file in files:
+                if file[file.rfind(".") + 1:len(files)] in extensions:
+                    count_files_affected += 1
+                    file_list.append(file)
+
+                progress.update(task, advance=1)
+
+        print(f"\n[blue bold]Found: {count_files_affected} files with some of these extensions: {extensions}")
+        
+        if count_files_affected > 0 and input(f"Could you review name files (y/n)? ") in ["Y", "y"]:
+            console.print(file_list)
+
+        return True
+    except Exception as err:
+        console.print(f"[red bold]EXECUTION ERROR: {format(err)}")
+        return False
 
 
 def main():
-    console.print("\nStarting search_extensions cron\n", style="bold blue")
-    console.print(globals(), "\n")
+    console.print("\n***** search_extensions started *****\n", style="bold green")
+    # console.print(globals(), "\n")
 
     # Go to the parent directory
     sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -93,7 +112,7 @@ def main():
     # Main proccess
     search_extensions()
 
-    console.print("\n[bold blue]search_extensions finished[/bold blue] :smile:\n")
+    console.print("\n[bold green]***** search_extensions finished :smile: *****[/bold green]\n")
 
 
 if __name__ == "__main__":
