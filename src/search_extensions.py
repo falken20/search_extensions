@@ -50,7 +50,7 @@ def get_params():
     return path, extensions, files
 
 
-def print_table(path, extensions, files):
+def print_table(path = "", extensions = "", files = [""]):
     console.print("Executing [bold]print_table[/bold]", style="green")
 
     table = Table(show_header=True, header_style="bold")
@@ -110,7 +110,10 @@ def main():
     sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
     # Main proccess
-    search_extensions()
+    if search_extensions():
+        console.print("search_extensions finished OK", style="green bold")
+    else:
+        console.print("search_extensions finished KO", style="red bold")
 
     console.print("\n[bold green]***** search_extensions finished :smile: *****[/bold green]\n")
 

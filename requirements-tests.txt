@@ -2,3 +2,4 @@ rich
 python-dotenv
 coverage
 pytest
+mock

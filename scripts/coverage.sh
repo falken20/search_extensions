@@ -1,3 +1,6 @@
 #!/bin/sh
 
-coverage run --source . -m pytest && coverage report --omit=tests/*.py && coverage html -o coverage-reports/coverage.html
+coverage run -m pytest -v && coverage html
+
+# With param -s for input
+# coverage run -m pytest - v -s && coverage html
