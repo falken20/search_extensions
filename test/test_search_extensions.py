@@ -1,25 +1,22 @@
-from distutils import extension
-from main import count_files, get_params
-import unittest
-
-class TestSearchExtensions (unittest.TestCase):
-    
-    def test_count_files_no_path(self):
-        self.assertEqual(count_files(""), [])
-
-    def test_count_files_err_path(self):
-        self.assertEqual(count_files("/no_path"), [])
-
-    def test_count_files_root_path(self):
-        # self.assertTrue(len(count_files("/")) > 0)
-        pass
-
-    def test_get_params(self):
-        path, extensions, files = get_params()
-        self.assertIsInstance(path, str)
-        self.assertIsInstance(extensions, str)
-        self.assertIsInstance(files, list)
+from os import path
+from src.search_extensions import count_files, get_params
+import pytest
 
 
-if __name__ == '__main__':
-    unittest.main()
+def test_count_files_no_path():
+    assert count_files("") == []
+
+def test_count_files_err_path():
+    assert count_files("/no_true_path") == []
+
+def test_count_files_root_path():
+    #assert len(count_files("/")) > 0
+    pass
+
+def test_get_params():
+    path, extensions, files = get_params()
+    assert isinstance(path, str) == True 
+    assert isinstance(extensions, str) == True 
+    assert isinstance(files, list) == True 
+
+
