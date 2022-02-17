@@ -3,6 +3,7 @@
 <img src="search_extensions.png" alt="drawing" width="600"/>
 <a href="https://richionline-portfolio.nw.r.appspot.com"><img src="https://falken-home.herokuapp.com/static/home_project/img/falken_logo.png" width=50 alt="Personal Portfolio web"></a>
 
+
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 [![Supported Python Versions](https://img.shields.io/pypi/pyversions/rich/10.11.0)](https://www.python.org) 
 ![GitHub Top languaje](https://img.shields.io/github/languages/top/falken20/search_extensions) ![GitHub language count](https://img.shields.io/github/languages/count/falken20/search_extensions) ![Test coverage](https://img.shields.io/badge/test%20coverage-93%25-green)
