@@ -48,11 +48,15 @@ def test_search_extensions_show_files():
     if not os.getenv("PATH_DIR"):
         os.environ["PATH_DIR"] = "/Users/u102105/workspace/java"
     if not os.getenv("EXTENSIONS"):
-        os.environ["EXTENSIONS"] = "txt"
+        os.environ["EXTENSIONS"] = "java"
 
     # Set the entry for input() function to "y"
     search_extensions.input = lambda letter_input: "y"
     assert search_extensions.search_extensions() is True
+
+
+def test_main():
+    search_extensions.main()
 
 
 def test_if_main():
