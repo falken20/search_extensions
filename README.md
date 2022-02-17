@@ -1,4 +1,7 @@
-[![Personal web](https://falken-home.herokuapp.com/static/home_project/img/falken_logo.png)](https://richionline-portfolio.nw.r.appspot.com) 
+
+<div align="center">
+<img src="search_extensions.png" alt="drawing" width="600"/>
+<a href="https://richionline-portfolio.nw.r.appspot.com"><img src="https://falken-home.herokuapp.com/static/home_project/img/falken_logo.png" width=50 alt="Personal Portfolio web"></a>
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 [![Supported Python Versions](https://img.shields.io/pypi/pyversions/rich/10.11.0)](https://www.python.org) 
@@ -6,9 +9,7 @@
 
 [![Richi web](https://img.shields.io/badge/web-richionline-blue)](https://richionline-portfolio.nw.r.appspot.com) 
 [![Twitter](https://img.shields.io/twitter/follow/richionline?style=social)](https://twitter.com/richionline)
-
-
-
+</div>
 
 # search_extensions
 Script to find files in a directory tree and it has to fulfill that it has a determinate extension. The extension set is in a config file. You can configure two environment variables with the path (**PATH_DIR**) and extensions (**EXTENSIONS**) to search. If the variables doesn't exist, the script ask the user for the values.
