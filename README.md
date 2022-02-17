@@ -11,7 +11,7 @@
 
 
 # search_extensions
-Script to find files in a directory tree and it has to fulfill that it has a determinate extension. The extension set is in a config file. You can configure two environment vars with the path (**PATH_DIR**) and extensions (**EXTENSIONS**) to search.
+Script to find files in a directory tree and it has to fulfill that it has a determinate extension. The extension set is in a config file. You can configure two environment variables with the path (**PATH_DIR**) and extensions (**EXTENSIONS**) to search. If the variables doesn't exist, the script ask the user for the values.
 
 ---
 ##### Setup
