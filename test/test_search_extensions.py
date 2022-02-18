@@ -1,6 +1,4 @@
 import os
-import pytest
-import mock
 
 from src import search_extensions
 
@@ -13,9 +11,8 @@ def test_count_files_err_path():
     assert search_extensions.count_files("/no_true_path") == []
 
 
-def test_count_files_root_path():
-    #assert len(search_extensions.count_files("/")) > 0
-    pass
+def test_count_files_true_path():
+    assert len(search_extensions.count_files("/Users")) > 0
 
 
 def test_get_params():
@@ -24,9 +21,9 @@ def test_get_params():
     search_extensions.input = lambda resp_input: ""
 
     path, extensions, files = search_extensions.get_params()
-    assert isinstance(path, str) == True
-    assert isinstance(extensions, str) == True
-    assert isinstance(files, list) == True
+    assert isinstance(path, str) is True
+    assert isinstance(extensions, str) is True
+    assert isinstance(files, list) is True
 
 
 def test_print_table():
@@ -57,13 +54,3 @@ def test_search_extensions_show_files():
 
 def test_main():
     search_extensions.main()
-
-
-def test_if_main():
-    from src import search_extensions
-    with mock.patch.object(search_extensions, "main", return_value=42):
-        with mock.patch.object(search_extensions, "__name__", "__main__"):
-            with mock.patch.object(search_extensions.sys, 'exit') as mock_exit:
-                search_extensions.main()
-                # assert mock_exit.call_args[0][0] == 42
-                assert True == True

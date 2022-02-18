@@ -1,11 +1,8 @@
 # by Richi Rod AKA @richionline / falken20
 
-from hashlib import new
 import logging
 import os
 import sys
-import time
-from typing import List
 
 from rich import print
 from rich import console
@@ -40,7 +37,7 @@ def count_files(path):
     return total_files
 
 
-def get_params():    
+def get_params():
     console.print("Executing [bold]get_params[/bold]", style="green")
 
     path = os.getenv("PATH_DIR") if os.getenv("PATH_DIR") else input("Insert path: ")
@@ -50,7 +47,7 @@ def get_params():
     return path, extensions, files
 
 
-def print_table(path = "", extensions = "", files = [""]):
+def print_table(path="", extensions="", files=[""]):
     console.print("Executing [bold]print_table[/bold]", style="green")
 
     table = Table(show_header=True, header_style="bold")
@@ -92,8 +89,8 @@ def search_extensions() -> bool:
                 progress.update(task, advance=1)
 
         print(f"\n[blue bold]Found: {count_files_affected} files with some of these extensions: {extensions}")
-        
-        if count_files_affected > 0 and input(f"Could you review name files (y/n)? ") in ["Y", "y"]:
+
+        if count_files_affected > 0 and input("Could you review name files (y/n)? ") in ["Y", "y"]:
             console.print(file_list)
 
         return True
