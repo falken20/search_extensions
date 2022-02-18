@@ -33,7 +33,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Coverage report
       run: |
-        coverage report --omit="*/test/*,*/venv/*"
+        coverage report
     - name: Test with pytest
       run: |
         pytest -v
