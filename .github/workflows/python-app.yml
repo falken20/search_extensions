@@ -33,8 +33,9 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test and Coverage report
       run: |
-        coverage run -m pytest -v && coverage report --omit="*/test/*,*/venv/*"
-    - name: Test with pytest
-      run: |
-        pytest -v
+        coverage run -m pytest -v && coverage report --omit="*/test/*,*/venv/*" > pytest-coverage.txt
+    - name: pytest-coverage-commentator
+      uses: coroo/pytest-coverage-commentator@v1.0.2
+      with:
+        pytest-coverage: pytest-coverage.txt
 
