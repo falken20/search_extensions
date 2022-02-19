@@ -5,7 +5,6 @@ import os
 import sys
 
 from rich import print
-from rich import console
 from rich.console import Console
 from rich.table import Table
 from rich.progress import Progress
@@ -82,7 +81,7 @@ def search_extensions() -> bool:
 
             count_files_affected = 0
             for file in files:
-                if file[file.rfind(".") + 1:len(files)] in extensions:
+                if file[file.rfind(".") + 1:len(file)] in extensions:
                     count_files_affected += 1
                     file_list.append(file)
 

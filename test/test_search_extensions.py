@@ -11,6 +11,10 @@ def test_count_files_err_path():
     assert search_extensions.count_files("/no_true_path") == []
 
 
+def test_count_files_root_path():
+    assert len(search_extensions.count_files("./")) > 0
+
+
 def test_get_params():
     # In get_params if environment vars doesnt exist execute input(), with this
     # sentence it builds an entry with value "" for all the input()
