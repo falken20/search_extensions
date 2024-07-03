@@ -31,7 +31,10 @@ def count_files(path):
     total_files = []
 
     for root, dirs, files in os.walk(path):
-        total_files += files
+        for name in files:
+            total_files.append(os.path.join(root, name))
+        # If only I want to see files names
+        # total_files += files
 
     return total_files
 
@@ -54,7 +57,7 @@ def print_table(path="", extensions="", files=[""]):
     table.add_column("Value")
     table.add_row("PATH", path)
     table.add_row("EXTENSIONS", extensions)
-    table.add_row("NUM FILES", str(len(files)))
+    table.add_row("TOTAL FILES", str(len(files)))
 
     console.print(table)
 
