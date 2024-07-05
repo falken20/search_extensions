@@ -4,7 +4,7 @@
 <a href="https://richionline-portfolio.nw.r.appspot.com"><img src="https://richionline-portfolio.nw.r.appspot.com/static/assets/falken_logo.ico" width=40 alt="Personal Portfolio web"></a>
 
 
-![Version](https://img.shields.io/badge/version-1.0.1-blue) [![Supported Python Versions](https://img.shields.io/pypi/pyversions/rich/10.11.0)](https://www.python.org) 
+![Version](https://img.shields.io/badge/version-1.0.2-blue) [![Supported Python Versions](https://img.shields.io/pypi/pyversions/rich/10.11.0)](https://www.python.org) 
 ![GitHub Top languaje](https://img.shields.io/github/languages/top/falken20/search_extensions) ![GitHub language count](https://img.shields.io/github/languages/count/falken20/search_extensions) ![Test coverage](https://img.shields.io/badge/test%20coverage-93%25-green)
 [![Richi web](https://img.shields.io/badge/web-richionline-blue)](https://richionline-portfolio.nw.r.appspot.com) 
 [![Twitter](https://img.shields.io/twitter/follow/richionline?style=social)](https://twitter.com/richionline)
@@ -53,5 +53,6 @@ EXTENSIONS=mp3,jpg,png,wav,txt
 ```
 
 ##### Versions
+- 1.0.2 Be able to make a executable
 - 1.0.1 Show path file in results
 - 1.0.0 Basic Version
