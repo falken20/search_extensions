@@ -56,3 +56,6 @@ EXTENSIONS=mp3,jpg,png,wav,txt
 - 1.0.2 Be able to make a executable
 - 1.0.1 Show path file in results
 - 1.0.0 Basic Version
+
+##### Learning tips 
+- [Pyinstaller](https://pyinstaller.org/) 
